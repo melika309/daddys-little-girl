@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>عشق بابا</title>
+  <style>
+    body {
+      direction: rtl;
+      font-family: Tahoma, sans-serif;
+      text-align: center;
+      background-color: #fff;
+      padding: 50px;
+      transition: background 1s;
+    }.question {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #e0bbff;
+  color: #4b0082;
+}
+
+.heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+  background-size: cover;
+  animation: float 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+#message {
+  display: none;
+  font-size: 20px;
+  color: #4b0082;
+  margin-top: 40px;
+  line-height: 2;
+  background: rgba(255,255,255,0.9);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+  </style>
+</head>
+<body>  <div id="quiz">
+    <div class="question" id="question"></div>
+    <button class="btn" onclick="nextStep()">منم منننننننننن</button>
+  </div>  <div id="hearts"></div>
+  <div id="message"></div>  <script>
+    const questions = [
+      "دختر من کیه؟!",
+      "پیشی من کیه؟!",
+      "پرنسس بابایی کیه؟!",
+      "نفس بابا کیه؟!",
+      "جوجه بابا کیه ؟!",
+      "عمر بابا کیه ؟!"
+    ];
+
+    let index = 0;
+    const questionDiv = document.getElementById("question");
+    const messageDiv = document.getElementById("message");
+    const heartsContainer = document.getElementById("hearts");
+
+    questionDiv.textContent = questions[index];
+
+    function nextStep() {
+      index++;
+      if (index < questions.length) {
+        questionDiv.textContent = questions[index];
+      } else {
+        showHearts();
+        document.getElementById("quiz").style.display = "none";
+        setTimeout(() => {
+          showFinalMessage();
+        }, 5000);
+      }
+    }
+
+    function showHearts() {
+      document.body.style.background = "linear-gradient(to bottom, #c1b3ff, #e0d8ff)";
+      for (let i = 0; i < 100; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        heart.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    function showFinalMessage() {
+      questionDiv.innerHTML = "پیامی از طرف بابایی...";
+      document.querySelector(".btn").textContent = "اگر مایل هستید بخونید کلیک کنید";
+      document.querySelector(".btn").onclick = showLoveMessage;
+      document.getElementById("quiz").style.display = "block";
+    }
+
+    function showLoveMessage() {
+      document.getElementById("quiz").style.display = "none";
+      messageDiv.style.display = "block";
+      messageDiv.innerHTML = `
+        سلام به خوشگل‌ترین فرشته‌ی دنیا<br>
+        بابایی عزیزت اینجاست تا بهت بگه چقدر دوستت داره…<br>
+        تو اومدی و دنیای منو روشن کردی، صدای خنده‌هات شیرین‌ترین آهنگ زندگیمه.<br>
+        هر بار نگات می‌کنم، قلبم پر از عشق میشه.<br>
+        تو دلیل لبخندامی، دلیل تلاشام، دلیل قوی بودنم!<br>
+        بابا قول میده همیشه کنارت باشه، دستتو بگیره، برات قهرمان باشه.<br>
+        تو کوچولوی بابایی هستی، ولی قلبت بزرگ‌تر از دنیاست...<br>
+        دوستت دارم تا همیشه، تا بی‌نهایت...<br><br>
+        با عشق: بابا
+      `;
+    }
+  </script></body>
+</html>
